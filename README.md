@@ -91,13 +91,6 @@ pip install opencv-python mediapipe fastapi uvicorn python-socketio pyserial num
 
     Open frontend/index.html in a modern browser.
 
-👤 Author
-
-Ali Hany Ali Nosseir
-
-    3rd Year AI Student @ Kafrelsheikh Unrt_iversity
-
-    Aspiring Data Scientist & Computer Vision Engineer
 
 🛡️ License
 
