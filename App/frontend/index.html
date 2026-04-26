@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roptics AI - Advanced Dashboard</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <aside id="sidebar">
+        <div class="logo">
+            <i class="fas fa-microchip"></i> Roptics AI
+        </div>
+
+        <div class="nav-buttons">
+            <button class="mode-btn" data-mode="teaching">
+                <i class="fas fa-chalkboard-teacher"></i> Teaching Mode
+            </button>
+
+            <button class="mode-btn active" data-mode="live">
+                <i class="fas fa-video"></i> Live Control
+            </button>
+
+            <button class="mode-btn" data-mode="security">
+                <i class="fas fa-shield-halved"></i> Security Mode
+            </button>
+
+            <button class="mode-btn" data-mode="gesture">
+                <i class="fas fa-hand-sparkles"></i> Gesture Mode
+            </button>
+        </div>
+    </aside>
+
+    <main>
+        <header class="top-bar">
+            <div class="title-section">
+                <h2>Next-Gen AI Dashboard</h2>
+                <span id="socket-status" class="status-badge disconnected">Disconnected</span>
+            </div>
+
+            <div class="top-actions">
+                <div class="zoom-indicator">
+                    <i class="fas fa-search-plus"></i> <span id="zoom-val">1.0</span>x
+                </div>
+
+                <div class="cam-selector">
+                    <i class="fas fa-camera"></i>
+                    <select id="camera-select">
+                        <option value="0">Built-in Camera</option>
+                        <option value="1">External USB Cam</option>
+                    </select>
+                </div>
+
+                <button id="settings-btn" class="theme-btn">
+                    <i class="fas fa-cog"></i>
+                </button>
+
+                <button id="toggle-sidebar-btn" class="theme-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="dashboard-grid" id="draggable-grid">
+
+            <!-- ============ VIDEO PANEL ============ -->
+            <div class="panel video-panel">
+                <div class="panel-header">
+                    <div class="header-left">
+                        <i class="fas fa-grip-vertical drag-handle"></i> Vision Feed
+                    </div>
+                    <div id="recording-status" class="rec-ui" style="display: none;">
+                        <span class="rec-dot"></span> REC
+                    </div>
+                </div>
+
+                <div class="video-container" id="whiteboard-container">
+                    <div class="live-badge">
+                        <div class="live-dot"></div> LIVE
+                    </div>
+
+                    <div id="camera-flash"></div>
+
+                    <img id="videoStream" src="" alt="Connecting to AI Server...">
+
+                    <canvas id="whiteboard-canvas"></canvas>
+
+                    <div id="snap-toast">Photo Saved!</div>
+                </div>
+
+                <div id="whiteboard-controls" style="display: none;">
+
+                    <div class="wb-row">
+                        <div class="wb-tool-group">
+                            <label class="wb-label"><i class="fas fa-palette"></i> Color</label>
+                            <input type="color" id="wb-color" value="#00e5ff" title="Pen Color">
+                        </div>
+
+                        <div class="wb-tool-group">
+                            <label class="wb-label"><i class="fas fa-pen"></i> Size <span id="wb-thickness-val">5</span>px</label>
+                            <input type="range" id="wb-thickness" min="1" max="30" value="5">
+                        </div>
+
+                        <div class="wb-tool-group">
+                            <label class="wb-label"><i class="fas fa-eraser"></i> Eraser <span id="wb-eraser-val">20</span>px</label>
+                            <input type="range" id="wb-eraser-size" min="5" max="80" value="20">
+                        </div>
+                    </div>
+
+                    <!-- Azrar Elt7km-->
+                    <div class="wb-row">
+                        <button id="wb-pen-btn" class="wb-btn active" title="Pen Tool">
+                            <i class="fas fa-pen"></i> Pen
+                        </button>
+
+                        <button id="wb-eraser-btn" class="wb-btn" title="Eraser Tool">
+                            <i class="fas fa-eraser"></i> Eraser
+                        </button>
+
+                        <button id="clear-canvas-btn" class="wb-btn danger" title="Clear All">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+
+                        <button id="record-btn" class="wb-btn" title="Start/Stop Recording">
+                            <i class="fas fa-circle" id="record-icon"></i> Record
+                        </button>
+
+                        <button id="snap-btn" class="wb-btn" title="Take Snapshot">
+                            <i class="fas fa-camera"></i> Snap
+                        </button>
+
+                        <!-- ta5yer ela5h -->
+                        <button id="wb-lang-btn" class="wb-btn" title="Toggle Keyboard Language" data-lang="en">
+                            <i class="fas fa-language"></i> <span id="wb-lang-label">EN</span>
+                        </button>
+                    </div>
+
+                    <div class="wb-row wb-text-row">
+                        <div class="wb-tool-group wb-text-group">
+                            <label class="wb-label"><i class="fas fa-keyboard"></i> Add Text</label>
+                            <input type="text" id="wb-text-input" placeholder="اكتب هنا..." maxlength="100">
+                        </div>
+
+                        <div class="wb-tool-group">
+                            <label class="wb-label">Font Size <span id="wb-font-val">24</span>px</label>
+                            <input type="range" id="wb-font-size" min="10" max="72" value="24">
+                        </div>
+
+                        <div class="wb-tool-group">
+                            <label class="wb-label">Text Color</label>
+                            <input type="color" id="wb-text-color" value="#ffffff">
+                        </div>
+
+                        <button id="wb-add-text-btn" class="wb-btn" title="Place Text on Canvas">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+
+                        <div class="wb-row wb-position-row">
+                        <label class="wb-label"><i class="fas fa-crosshairs"></i> Text Position</label>
+
+                        <div class="wb-position-controls">
+                            <div class="wb-axis-group">
+                                <label>X <span id="wb-text-x-val">50</span>%</label>
+                                <input type="range" id="wb-text-x" min="0" max="100" value="50">
+                            </div>
+                            <div class="wb-axis-group">
+                                <label>Y <span id="wb-text-y-val">50</span>%</label>
+                                <input type="range" id="wb-text-y" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end whiteboard-controls -->
+
+            </div>
+            <!-- end video-panel -->
+
+
+            <!-- ============ HAND TELEMETRY PANEL ============ -->
+            <div class="panel analytics-panel">
+                <div class="panel-header">
+                    <i class="fas fa-grip-vertical drag-handle"></i> Hand Skeleton (Telemetry)
+                </div>
+                <div class="hand-viz-container">
+                    <svg id="hand-skeleton" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet"></svg>
+                </div>
+            </div>
+
+
+            <!-- ============ HARDWARE / STATS PANEL ============ -->
+            <div class="panel hardware-panel">
+                <div class="panel-header">
+                    <i class="fas fa-grip-vertical drag-handle"></i> System Stats & Hardware
+                </div>
+                <div class="hw-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <label>FPS</label>
+                            <span id="fps-val">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <label>Action</label>
+                            <span id="action-status">IDLE</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Stream Quality <span id="q-val">50%</span></label>
+                        <input id="quality-range" type="range" min="10" max="100" value="50">
+                    </div>
+
+                    <hr class="separator">
+
+                    <div class="servo-controls">
+                        <div class="servo-item">
+                            <label>Pan (X)</label>
+                            <input id="servo-x" type="range" min="0" max="180" value="90">
+                        </div>
+                        <div class="servo-item">
+                            <label>Tilt (Y)</label>
+                            <input id="servo-y" type="range" min="0" max="180" value="90">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ============ CONSOLE PANEL ============ -->
+            <div class="panel terminal-panel">
+                <div class="panel-header">
+                    <i class="fas fa-grip-vertical drag-handle"></i> System Console
+                </div>
+                <div class="terminal" id="logs">
+                    <p class="log-entry">> Roptics AI System Initialized...</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- end dashboard-grid -->
+
+    </main>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
