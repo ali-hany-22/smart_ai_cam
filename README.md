@@ -1,15 +1,20 @@
-# smart_AI_cam
-🦾 Roptics AI: Next-Gen Computer Vision Control System
-🦾 Roptics AI: Next-Gen Computer Vision Control System
+# 🦾 Roptics AI: Next-Gen Computer Vision Control System
+> **An Advanced Human-Machine Interface (HMI) integrating MediaPipe, FastAPI, and ESP32 for Real-Time Automation.**
 
-    An Advanced Human-Machine Interface (HMI) integrating MediaPipe, FastAPI, and ESP32 for Real-Time Automation.
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Framework-009688.svg?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Computer--Vision-5C3EE8.svg?style=for-the-badge&logo=opencv)](https://opencv.org/)
+[![MediaPipe](https://img.shields.io/badge/Google-MediaPipe-0070D2.svg?style=for-the-badge&logo=google)](https://mediapipe.dev/)
 
-Roptics AI is a sophisticated system that bridges the gap between Computer Vision and Hardware Control. It allows users to interact with their environment through hand gestures, featuring an interactive virtual whiteboard, digital media control (Zoom/Record), and real-time hardware tracking using a single-axis servo mechanism.
-🏗️ System Architecture & File Structure
+**Roptics AI** is a sophisticated system that bridges the gap between Computer Vision and Hardware Control. It allows users to interact with their environment through hand gestures, featuring an interactive virtual whiteboard, digital media control (Zoom/Record), and real-time hardware tracking using a single-axis servo mechanism.
 
-The project follows a Modular Architecture, ensuring high scalability and clean separation of concerns:
-Bash
+---
 
+## 🏗️ System Architecture & File Structure
+
+The project follows a **Modular Architecture**, ensuring high scalability and clean separation of concerns:
+
+```text
 SMART_AI_CAM_R/
 ├── 📂 backend/                  # The AI Core Engine
 │   ├── 📂 camera/               # Multi-threaded Video Acquisition
@@ -17,7 +22,7 @@ SMART_AI_CAM_R/
 │   ├── 📂 vision/               # Computer Vision Algorithms
 │   │   ├── hand_tracking.py     # 21-Landmark Detection & Gesture Recognition
 │   │   ├── teaching_mode.py     # Virtual Whiteboard & Air-Keyboard logic
-│   │   ├── live_mode.py         # Pinch-to-Zoom & Media Controller
+│   │   ├── live_mode.py         # Smooth Pinch-to-Zoom & Media Controller
 │   │   ├── gesture_drive.py     # Serial Comm & ESP32 Pan-Servo logic
 │   │   └── control_mode.py      # Automated State Machine (Mode Switcher)
 │   ├── 📂 assets/               # Local Media Repository
@@ -28,11 +33,10 @@ SMART_AI_CAM_R/
 ├── 📂 ESP32/                    # Embedded Firmware
 │   └── esp32_pan_servo.ino      # C++ Micro-controller Firmware
 ├── 📂 frontend/                 # Interactive Dashboard
-│   ├── index.html               # Main UI Layout
-│   ├── style.css                # Futuristic Cyberpunk Theme
-│   └── script.js                # WebSocket & Real-time Visualization
+│   ├── index.html               # Main UI Layout (Cyberpunk Theme)
+│   ├── style.css                # Futuristic Visual Design
+│   └── script.js                # WebSocket & Real-time SVG Hand Visualization
 └── 📂 test/                     # Unit Tests & Debugging Tools
-
 🚀 Key Features
 📡 1. Advanced Hand Tracking
 
